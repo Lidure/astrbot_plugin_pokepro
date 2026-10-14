@@ -291,6 +291,12 @@
                     "上香",
                     "咖波撕"
                 ]
+            },
+            "call_llm": {
+                "description": "触发命令时同时允许 LLM 回复",
+                "type": "bool",
+                "hint": "默认关闭：只执行命令，不调用 LLM；开启后允许 AstrBot 对这条模拟命令进行 LLM 回复，可能产生额外消耗。",
+                "default": false
             }
         }
     },
