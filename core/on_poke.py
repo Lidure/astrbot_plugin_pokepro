@@ -182,12 +182,16 @@ class GetPokeHandler:
 
         cmd = self.cfg.get_command()
 
+        # Re-dispatch as a command without an @mention. The command router
+        # still receives a wake-command event, but ordinary LLM replies are
+        # disabled by default to avoid duplicate responses from wake plugins.
         evt.message_obj.message = [Plain(cmd)]
         evt.message_obj.message_str = cmd
         evt.is_at_or_wake_command = True
         evt.message_str = cmd
-        evt.should_call_llm(True)
+        evt.should_call_llm(bool(self.cfg.command.call_llm))
         evt.set_extra("is_poked", True)
+        evt.set_extra("pokepro_command", True)
 
         self.context.get_event_queue().put_nowait(evt)
         yield None
