@@ -152,6 +152,7 @@ class BanConfig(ConfigNode):
 class CommandConfig(ConfigNode):
     weight: int
     pool: list[str]
+    call_llm: bool
 
 
 class SchedulerConfig(ConfigNode):
